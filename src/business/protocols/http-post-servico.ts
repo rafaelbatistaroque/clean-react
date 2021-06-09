@@ -1,5 +1,5 @@
-import { HttpPostParams, HttpResponse } from '@/shared/types';
+import { HttpPostParams, HttpResponse } from "@/shared/types";
 
-export interface IHttpPostServico {
-    post(params:HttpPostParams):Promise<HttpResponse>
+export interface IHttpPostServico<T, U> {
+	post(params: HttpPostParams<T>): Promise<HttpResponse<U>>;
 }

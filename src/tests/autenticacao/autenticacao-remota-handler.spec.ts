@@ -1,16 +1,18 @@
+import { AutenticacaoParams } from "@/shared/types";
 import { mockBodyAutenticacao, MockHttpPostServicoSpy } from "@/tests/mocks";
 import { AutenticacaoRemotaHandler } from "@/business/services/autenticacao/autenticacao-remota-handler";
 import { ErroCredenciaisInvalidas, ErroInesperado } from "@/shared/errors";
 import { EHttpStatusCode } from "@/shared/enums";
+import { AccontModel } from "@/domain/models/AccontModel";
 import faker from "faker";
 
 type SUTTypes = {
 	sut: AutenticacaoRemotaHandler;
-	httpPostServicoSpy: MockHttpPostServicoSpy;
+	httpPostServicoSpy: MockHttpPostServicoSpy<AutenticacaoParams, AccontModel>;
 };
 
 const criarSUT = (url = faker.internet.url()): SUTTypes => {
-	const httpPostServicoSpy = new MockHttpPostServicoSpy();
+	const httpPostServicoSpy = new MockHttpPostServicoSpy<AutenticacaoParams, AccontModel>();
 	const sut = new AutenticacaoRemotaHandler(url, httpPostServicoSpy);
 
 	return {

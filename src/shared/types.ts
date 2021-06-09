@@ -1,16 +1,16 @@
-import { EHttpStatusCode } from './enums';
+import { EHttpStatusCode } from "./enums";
 
-export type HttpPostParams = {
-    url: string
-    body?: object
-}
+export type HttpPostParams<T> = {
+	url: string;
+	body?: T;
+};
 
 export type AutenticacaoParams = {
-    email:string
-    senha:string
-}
+	email: string;
+	senha: string;
+};
 
-export type HttpResponse = {
-    statusCode: EHttpStatusCode
-    body?: any
-}
+export type HttpResponse<T> = {
+	statusCode: EHttpStatusCode;
+	body?: T;
+};
