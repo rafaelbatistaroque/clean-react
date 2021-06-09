@@ -5,8 +5,9 @@
   "author": "Rafael Batista <3909@ucdb.br>",
   "license": "MIT",
   "scripts": {
-    "test": "jest",
-    "teste:watch": "jest --watchAll"
+    "test": "jest --passWithNoTests --silent",
+    "test:watch": "yarn test --watch",
+    "test:staged": "yarn test --findRelatedTests"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
