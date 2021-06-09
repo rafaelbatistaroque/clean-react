@@ -1,5 +1,5 @@
 import { AutenticacaoParams } from "@/shared/types";
-import { mockBodyAutenticacao, MockHttpPostServicoSpy } from "@/tests/mocks";
+import { mockBodyAccountModel, mockBodyAutenticacao, MockHttpPostServicoSpy } from "@/tests/mocks";
 import { AutenticacaoRemotaHandler } from "@/business/services/autenticacao/autenticacao-remota-handler";
 import { ErroCredenciaisInvalidas, ErroInesperado } from "@/shared/errors";
 import { EHttpStatusCode } from "@/shared/enums";
@@ -74,5 +74,18 @@ describe("business.services.autenticacao", () => {
 		const promise = sut.handler(mockBodyAutenticacao());
 
 		await expect(promise).rejects.toThrow(new ErroInesperado());
+	});
+
+	test("ao invovar handler | quando retorno httpPostServico é 200 | deve retornar AccontModel", async () => {
+		const { sut, httpPostServicoSpy } = criarSUT();
+		const httpResposta = mockBodyAccountModel();
+		httpPostServicoSpy.response = {
+			statusCode: EHttpStatusCode.ok,
+			body: httpResposta,
+		};
+
+		const resposta = await sut.handler(mockBodyAutenticacao());
+
+		expect(resposta).toEqual(httpResposta);
 	});
 });
