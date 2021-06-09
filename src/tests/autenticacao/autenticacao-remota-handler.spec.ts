@@ -1,4 +1,4 @@
-import { HttpPostServicoSpy } from '../../mocks/http-servico';
+import { HttpPostServicoSpy } from '../mocks/http-servico';
 import { AutenticacaoRemotaHandler } from '../../business/services/autenticacao/autenticacao-remota-handler';
 import faker from "faker";
 

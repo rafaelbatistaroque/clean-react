@@ -1,3 +1,5 @@
+import { HttpPostParams } from './../../shared/types';
+
 export interface IHttpPostServico {
-    post(url:string):Promise<void>
+    post(params:HttpPostParams):Promise<void>
 }

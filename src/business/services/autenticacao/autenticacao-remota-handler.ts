@@ -4,6 +4,6 @@ export class AutenticacaoRemotaHandler{
     constructor(private readonly url:string,private readonly httpServico:IHttpPostServico){}
 
     async autenticar():Promise<void>{
-        await this.httpServico.post(this.url);
+        await this.httpServico.post({url: this.url});
     }
 }
