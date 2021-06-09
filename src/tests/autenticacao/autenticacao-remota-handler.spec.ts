@@ -1,15 +1,14 @@
-import { mockAuthetication } from './../mocks/authentication';
-import { HttpPostServicoSpy } from '../mocks/http-servico';
-import { AutenticacaoRemotaHandler } from '../../business/services/autenticacao/autenticacao-remota-handler';
+import { mockBodyAutenticacao, MockHttpPostServicoSpy } from '@/tests/mocks';
+import { AutenticacaoRemotaHandler } from '@/business/services/autenticacao/autenticacao-remota-handler';
 import faker from "faker";
 
 type SUTTypes = {
     sut: AutenticacaoRemotaHandler,
-    httpPostServicoSpy: HttpPostServicoSpy
+    httpPostServicoSpy: MockHttpPostServicoSpy
 }
 
 const criarSUT = (url = faker.internet.url()): SUTTypes => {
-    const httpPostServicoSpy = new HttpPostServicoSpy();
+    const httpPostServicoSpy = new MockHttpPostServicoSpy();
     const sut = new AutenticacaoRemotaHandler(url, httpPostServicoSpy);
 
     return {
@@ -23,14 +22,14 @@ describe('business.services.autenticacao', () => {
         const url = faker.internet.url();
         const {sut, httpPostServicoSpy}= criarSUT(url);
 
-        await sut.autenticar(mockAuthetication());
+        await sut.autenticar(mockBodyAutenticacao());
 
         expect(httpPostServicoSpy.url).toBe(url);
     });
 
     test('ao invovar handler | quando invocar httpServico | deve estar com body correto', async () => {
         const {sut, httpPostServicoSpy}= criarSUT();
-        const autenticacoParams = mockAuthetication();
+        const autenticacoParams = mockBodyAutenticacao();
         await sut.autenticar(autenticacoParams);
 
         expect(httpPostServicoSpy.body).toEqual(autenticacoParams);
