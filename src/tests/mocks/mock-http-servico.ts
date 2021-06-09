@@ -6,7 +6,7 @@ export class MockHttpPostServicoSpy implements IHttpPostServico {
 	url?: string;
 	body?: object;
 	response: HttpResponse = {
-		statusCode: EHttpStatusCode.noContent,
+		statusCode: EHttpStatusCode.ok,
 	};
 
 	async post(params: HttpPostParams): Promise<HttpResponse> {

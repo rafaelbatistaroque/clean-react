@@ -1,6 +1,6 @@
 import { mockBodyAutenticacao, MockHttpPostServicoSpy } from "@/tests/mocks";
 import { AutenticacaoRemotaHandler } from "@/business/services/autenticacao/autenticacao-remota-handler";
-import { ErroCredenciaisInvalidas } from "@/shared/errors";
+import { ErroCredenciaisInvalidas, ErroInesperado } from "@/shared/errors";
 import { EHttpStatusCode } from "@/shared/enums";
 import faker from "faker";
 
@@ -45,5 +45,32 @@ describe("business.services.autenticacao", () => {
 		const promise = sut.handler(mockBodyAutenticacao());
 
 		await expect(promise).rejects.toThrow(new ErroCredenciaisInvalidas());
+	});
+
+	test("ao invovar handler | quando retorno httpPostServico é 400 | deve lançar ErroInesperado", async () => {
+		const { sut, httpPostServicoSpy } = criarSUT();
+		httpPostServicoSpy.response.statusCode = EHttpStatusCode.badRequest;
+
+		const promise = sut.handler(mockBodyAutenticacao());
+
+		await expect(promise).rejects.toThrow(new ErroInesperado());
+	});
+
+	test("ao invovar handler | quando retorno httpPostServico é 500 | deve lançar ErroInesperado", async () => {
+		const { sut, httpPostServicoSpy } = criarSUT();
+		httpPostServicoSpy.response.statusCode = EHttpStatusCode.serverError;
+
+		const promise = sut.handler(mockBodyAutenticacao());
+
+		await expect(promise).rejects.toThrow(new ErroInesperado());
+	});
+
+	test("ao invovar handler | quando retorno httpPostServico é 404 | deve lançar ErroInesperado", async () => {
+		const { sut, httpPostServicoSpy } = criarSUT();
+		httpPostServicoSpy.response.statusCode = EHttpStatusCode.badRequest;
+
+		const promise = sut.handler(mockBodyAutenticacao());
+
+		await expect(promise).rejects.toThrow(new ErroInesperado());
 	});
 });
