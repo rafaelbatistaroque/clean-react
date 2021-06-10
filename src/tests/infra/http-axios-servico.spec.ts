@@ -1,3 +1,4 @@
+import { HttpPostParams } from "@/shared";
 import { HttpAxiosServico } from "@/infra/http-axios-servico/http-axios-servico";
 import axios from "axios";
 import faker from "faker";
@@ -9,13 +10,18 @@ const criarSUT = (): HttpAxiosServico => {
 	return new HttpAxiosServico();
 };
 
+const mockPostRequest = (): HttpPostParams<any> => ({
+	url: faker.internet.url(),
+	body: faker.random.objectElement(),
+});
+
 describe("infra", () => {
 	test("ao invovar post | quando passado url por parâmetro | deve estar com url e verbo corretos", async () => {
-		const url = faker.internet.url();
+		const request = mockPostRequest();
 		const sut = criarSUT();
 
-		await sut.post({ url });
+		await sut.post(request);
 
-		expect(mockedAxios.post).toHaveBeenCalledWith(url);
+		expect(mockedAxios.post).toHaveBeenCalledWith(request.url);
 	});
 });
