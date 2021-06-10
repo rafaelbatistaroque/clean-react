@@ -1,6 +1,5 @@
-import { HttpPostParams, HttpResponse } from "@/shared/types";
+import { HttpPostParams, HttpResponse, EHttpStatusCode } from "@/shared";
 import { IHttpPostServico } from "@/business/protocols/http-post-servico";
-import { EHttpStatusCode } from "@/shared/enums";
 
 export class MockHttpPostServicoSpy<T, U> implements IHttpPostServico<T, U> {
 	url?: string;

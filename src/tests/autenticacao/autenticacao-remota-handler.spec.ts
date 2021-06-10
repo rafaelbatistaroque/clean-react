@@ -1,8 +1,6 @@
-import { AutenticacaoParams } from "@/shared/types";
+import { AutenticacaoParams, EHttpStatusCode, ErroCredenciaisInvalidas, ErroInesperado } from "@/shared";
 import { mockBodyAccountModel, mockBodyAutenticacao, MockHttpPostServicoSpy } from "@/tests/mocks";
 import { AutenticacaoRemotaHandler } from "@/business/services/autenticacao/autenticacao-remota-handler";
-import { ErroCredenciaisInvalidas, ErroInesperado } from "@/shared/errors";
-import { EHttpStatusCode } from "@/shared/enums";
 import { AccontModel } from "@/domain/models/AccontModel";
 import faker from "faker";
 

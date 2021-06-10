@@ -1,5 +1,5 @@
 import { AccontModel } from "@/domain/models/AccontModel";
-import { AutenticacaoParams } from "@/shared/types";
+import { AutenticacaoParams } from "@/shared";
 import faker from "faker";
 
 export const mockBodyAutenticacao = (): AutenticacaoParams => {

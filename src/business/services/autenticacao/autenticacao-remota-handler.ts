@@ -1,7 +1,5 @@
-import { ErroCredenciaisInvalidas, ErroInesperado } from "@/shared/errors";
-import { AutenticacaoParams } from "@/shared/types";
+import { AutenticacaoParams, EHttpStatusCode, ErroCredenciaisInvalidas, ErroInesperado } from "@/shared";
 import { IHttpPostServico } from "@/business/protocols/http-post-servico";
-import { EHttpStatusCode } from "@/shared/enums";
 import { AccontModel } from "@/domain/models/AccontModel";
 import { IAutenticacao } from "@/domain/casos-de-uso/autenticacao";
 
