@@ -1,6 +1,6 @@
 import { AutenticacaoParams } from "@/shared";
-import { AccontModel } from "@/domain/models/AccontModel";
+import { AccountModel } from "@/domain/models";
 
 export interface IAutenticacao {
-	handler(params: AutenticacaoParams): Promise<AccontModel>;
+	handler(params: AutenticacaoParams): Promise<AccountModel>;
 }

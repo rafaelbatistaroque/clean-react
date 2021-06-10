@@ -1,16 +1,16 @@
 import { AutenticacaoParams, EHttpStatusCode, ErroCredenciaisInvalidas, ErroInesperado } from "@/shared";
 import { mockBodyAccountModel, mockBodyAutenticacao, MockHttpPostServicoSpy } from "@/tests/mocks";
-import { AutenticacaoRemotaHandler } from "@/business/services/autenticacao/autenticacao-remota-handler";
-import { AccontModel } from "@/domain/models/AccontModel";
+import { AutenticacaoRemotaHandler } from "@/business/services/autenticacao";
+import { AccountModel } from "@/domain/models";
 import faker from "faker";
 
 type SUTTypes = {
 	sut: AutenticacaoRemotaHandler;
-	httpPostServicoSpy: MockHttpPostServicoSpy<AutenticacaoParams, AccontModel>;
+	httpPostServicoSpy: MockHttpPostServicoSpy<AutenticacaoParams, AccountModel>;
 };
 
 const criarSUT = (url = faker.internet.url()): SUTTypes => {
-	const httpPostServicoSpy = new MockHttpPostServicoSpy<AutenticacaoParams, AccontModel>();
+	const httpPostServicoSpy = new MockHttpPostServicoSpy<AutenticacaoParams, AccountModel>();
 	const sut = new AutenticacaoRemotaHandler(url, httpPostServicoSpy);
 
 	return {
@@ -74,7 +74,7 @@ describe("business.services.autenticacao", () => {
 		await expect(promise).rejects.toThrow(new ErroInesperado());
 	});
 
-	test("ao invovar handler | quando retorno httpPostServico é 200 | deve retornar AccontModel", async () => {
+	test("ao invovar handler | quando retorno httpPostServico é 200 | deve retornar AccountModel", async () => {
 		const { sut, httpPostServicoSpy } = criarSUT();
 		const httpResposta = mockBodyAccountModel();
 		httpPostServicoSpy.response = {

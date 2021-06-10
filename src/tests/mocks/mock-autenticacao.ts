@@ -1,4 +1,4 @@
-import { AccontModel } from "@/domain/models/AccontModel";
+import { AccountModel } from "@/domain/models";
 import { AutenticacaoParams } from "@/shared";
 import faker from "faker";
 
@@ -9,7 +9,7 @@ export const mockBodyAutenticacao = (): AutenticacaoParams => {
 	};
 };
 
-export const mockBodyAccountModel = (): AccontModel => {
+export const mockBodyAccountModel = (): AccountModel => {
 	return {
 		token: faker.datatype.uuid(),
 	};

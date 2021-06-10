@@ -1,5 +1,5 @@
 import { HttpPostParams, HttpResponse, EHttpStatusCode } from "@/shared";
-import { IHttpPostServico } from "@/business/protocols/http-post-servico";
+import { IHttpPostServico } from "@/business/protocols";
 
 export class MockHttpPostServicoSpy<T, U> implements IHttpPostServico<T, U> {
 	url?: string;
