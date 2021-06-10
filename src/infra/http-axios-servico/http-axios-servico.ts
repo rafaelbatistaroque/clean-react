@@ -3,6 +3,6 @@ import axios from "axios";
 
 export class HttpAxiosServico {
 	async post(params: HttpPostParams<any>): Promise<void> {
-		axios(params.url);
+		axios.post(params.url);
 	}
 }
