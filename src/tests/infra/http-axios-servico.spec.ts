@@ -10,12 +10,12 @@ const criarSUT = (): HttpAxiosServico => {
 };
 
 describe("infra", () => {
-	test("ao invovar post | quando passado url por parâmetro | deve estar com url correta", async () => {
+	test("ao invovar post | quando passado url por parâmetro | deve estar com url e verbo corretos", async () => {
 		const url = faker.internet.url();
 		const sut = criarSUT();
 
 		await sut.post({ url });
 
-		expect(mockedAxios).toHaveBeenCalledWith(url);
+		expect(mockedAxios.post).toHaveBeenCalledWith(url);
 	});
 });
