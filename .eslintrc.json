@@ -1,9 +1,19 @@
 {
+    "settings": {
+        "react":{
+            "version":"detect"
+        }
+    },
     "extends": [
         "eslint:recommended",
-        "airbnb"
+        "airbnb",
+        "plugin/react:recommended"
     ],
+    "plugins": ["react"],
     "parserOptions": {
         "project": "./tsconfig.json"
+    },"rules": {
+        "react/jsx-use-react":"error",
+        "react/jsx-use-vars":"error"
     }
 }
