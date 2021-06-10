@@ -16,12 +16,12 @@ const mockPostRequest = (): HttpPostParams<any> => ({
 });
 
 describe("infra", () => {
-	test("ao invovar post | quando passado url por parâmetro | deve estar com url e verbo corretos", async () => {
+	test("ao invovar post | quando passado url por parâmetro | deve estar com url, verbo e body corretos", async () => {
 		const request = mockPostRequest();
 		const sut = criarSUT();
 
 		await sut.post(request);
 
-		expect(mockedAxios.post).toHaveBeenCalledWith(request.url);
+		expect(mockedAxios.post).toHaveBeenCalledWith(request.url, request.body);
 	});
 });
