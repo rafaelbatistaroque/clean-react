@@ -5,10 +5,14 @@ import faker from "faker";
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
+const criarSUT = (): HttpAxiosServico => {
+	return new HttpAxiosServico();
+};
+
 describe("infra", () => {
 	test("ao invovar post | quando passado url por parâmetro | deve estar com url correta", async () => {
 		const url = faker.internet.url();
-		const sut = new HttpAxiosServico();
+		const sut = criarSUT();
 
 		await sut.post({ url });
 
