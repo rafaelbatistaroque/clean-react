@@ -1,39 +1,39 @@
-import { HttpPostParams } from "@/shared";
 import { HttpAxiosServico } from "@/infra/http-axios-servico/http-axios-servico";
+import { mockAxios, mockPostRequest } from "@/tests/mocks";
 import axios from "axios";
-import faker, { fake } from "faker";
 
 jest.mock("axios");
-const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-const mockedAxiosResult = { data: faker.random.objectElement(), status: faker.datatype.number() };
-
-mockedAxios.post.mockResolvedValue(mockedAxiosResult);
-
-const criarSUT = (): HttpAxiosServico => {
-	return new HttpAxiosServico();
+type SUTTypes = {
+	sut: HttpAxiosServico;
+	mockedAxios: jest.Mocked<typeof axios>;
 };
 
-const mockPostRequest = (): HttpPostParams<any> => ({
-	url: faker.internet.url(),
-	body: faker.random.objectElement(),
-});
+const criarSUT = (): SUTTypes => {
+	const sut = new HttpAxiosServico();
+	const mockedAxios = mockAxios();
+
+	return {
+		sut,
+		mockedAxios,
+	};
+};
 
 describe("infra", () => {
 	test("ao invovar post | quando passado url por parâmetro | deve estar com url, verbo e body corretos", async () => {
 		const request = mockPostRequest();
-		const sut = criarSUT();
+		const { sut, mockedAxios } = criarSUT();
 
 		await sut.post(request);
 
 		expect(mockedAxios.post).toHaveBeenCalledWith(request.url, request.body);
 	});
 
-	test("ao invovar post | quando parâmetros corretos | deve retornar statusCode e body específicos", async () => {
-		const sut = criarSUT();
+	test("ao invovar post | quando parâmetros corretos | deve retornar statusCode e body específicos", () => {
+		const { sut, mockedAxios } = criarSUT();
 
-		const resposta = await sut.post(mockPostRequest());
+		const resposta = sut.post(mockPostRequest());
 
-		expect(resposta).toEqual({ statusCode: mockedAxiosResult.status, body: mockedAxiosResult.data });
+		expect(resposta).toEqual(mockedAxios.post.mock.results[0].value);
 	});
 });
